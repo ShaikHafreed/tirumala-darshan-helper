@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Tirumala Darshan Helper",
+  "version": "1.0.0",
+  "description": "Unofficial helper for TTD Special Entry Darshan: keeps pilgrim details encrypted on this computer, fills text fields when you ask, and reminds you before release time.",
+  "permissions": ["activeTab", "alarms", "notifications", "scripting", "storage"],
+  "optional_host_permissions": ["https://ntfy.sh/*"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Tirumala Darshan Helper",
+    "default_icon": { "16": "icon16.png", "48": "icon48.png", "128": "icon128.png" }
+  },
+  "background": { "service_worker": "background.js", "type": "module" },
+  "icons": { "16": "icon16.png", "48": "icon48.png", "128": "icon128.png" }
+}

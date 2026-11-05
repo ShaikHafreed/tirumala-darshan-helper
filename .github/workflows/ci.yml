@@ -1,0 +1,17 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm run lint
+      - run: npm test
+      - run: npm i --no-save playwright && npx playwright install --with-deps chromium
+      - run: node tests/e2e/fill.e2e.cjs
+      - run: xvfb-run -a node tests/e2e/popup.e2e.cjs
+      - run: npm run package
+      - uses: actions/upload-artifact@v4
+        with: { name: extension-zip, path: dist/*.zip }

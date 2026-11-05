@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tirumala Darshan Helper</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <div class="sky" aria-hidden="true"><i class="orb"></i><i class="star" style="left:12%;top:14%"></i><i class="star" style="left:30%;top:46%;animation-delay:.7s"></i><i class="star" style="left:48%;top:10%;animation-delay:1.3s"></i><i class="star" style="left:63%;top:38%;animation-delay:.3s"></i><i class="star" style="left:80%;top:12%;animation-delay:1.9s"></i><i class="star" style="left:92%;top:44%;animation-delay:1s"></i></div>
+    <svg class="hills" viewBox="0 0 380 96" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <g class="cloud c1" fill="#fff" opacity=".22"><ellipse cx="60" cy="22" rx="26" ry="6"/><ellipse cx="78" cy="18" rx="16" ry="5"/></g><g class="cloud c2" fill="#fff" opacity=".16"><ellipse cx="200" cy="12" rx="22" ry="5"/><ellipse cx="216" cy="9" rx="12" ry="4"/></g>
+      <path d="M0 96V62l30-12 28 10 34-20 36 18 30-14 40 16 34-22 36 18 34-12 42 14 36-8V96z" fill="#5E9B5C" opacity=".55"/>
+      <path d="M0 96V74l40-14 36 12 40-18 44 16 40-12 52 14 40-16 48 14V96z" fill="#2F6B3A" opacity=".92"/>
+      <g>
+        <!-- golden vimana -->
+        <rect x="214" y="70" width="40" height="26" fill="#E8B64B"/><rect x="214" y="70" width="40" height="3" fill="#F6D58A"/>
+        <path d="M218 70l4-12h24l4 12z" fill="#D9A236"/><path d="M224 58l3-11h14l3 11z" fill="#E8B64B"/><path d="M230 47l4-10 4 10z" fill="#F6D58A"/>
+        <rect x="233.2" y="26" width="1.6" height="12" fill="#F6D58A"/><circle class="glint g2" cx="234" cy="25" r="2.2" fill="#F6D58A"/>
+        <!-- white gopuram -->
+        <path d="M286 96V44l8-4h40l8 4v52z" fill="#FFF6E3"/>
+        <path d="M290 44l6-9h36l6 9z" fill="#F3E3BF"/><path d="M296 35l6-8h24l6 8z" fill="#FFF6E3"/><path d="M304 27l5-7h14l5 7z" fill="#F3E3BF"/>
+        <g fill="#E8B64B"><circle cx="304" cy="18" r="2"/><circle class="glint" cx="314" cy="14" r="2.6"/><circle cx="324" cy="18" r="2"/></g>
+        <g fill="#C99A2E" opacity=".75"><rect x="298" y="52" width="6" height="8" rx="3"/><rect x="311" y="52" width="6" height="8" rx="3"/><rect x="324" y="52" width="6" height="8" rx="3"/><rect x="298" y="68" width="6" height="8" rx="3"/><rect x="324" y="68" width="6" height="8" rx="3"/></g>
+        <rect x="308" y="70" width="14" height="26" rx="7" fill="#B7791F"/>
+      </g>
+      <rect x="0" y="90" width="380" height="6" fill="#E8B64B" opacity=".9"/>
+    </svg>
+    <div class="petals" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="brand">
+      <svg class="namam" viewBox="0 0 24 30" aria-hidden="true"><path d="M3 2c0 10 1 17 9 20 8-3 9-10 9-20" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/><path d="M12 6v16" stroke="#F6D58A" stroke-width="3.2" stroke-linecap="round"/><circle cx="12" cy="27" r="2" fill="#F6D58A"/></svg>
+      <div>
+        <h1 data-i18n="app_title"></h1>
+        <p id="tagline"></p>
+      </div>
+    </div>
+    <div id="who" class="who" hidden>
+      <span id="who-name"></span>
+      <button id="lock-btn" type="button" class="linkbtn" data-i18n="lock"></button>
+    </div>
+  </header>
+
+  <!-- first run: disclaimer -->
+  <section id="disclaimer" class="screen" hidden>
+    <h2 data-i18n="disc_title"></h2>
+    <p id="disc-body" class="para"></p>
+    <label class="lbl" for="lang-pre" data-i18n="s_lang"></label>
+    <select id="lang-pre"></select>
+    <button id="disc-accept" class="btn primary" type="button" data-i18n="disc_accept"></button>
+  </section>
+
+  <!-- sign up / log in -->
+  <section id="auth" class="screen" hidden>
+    <div class="seg">
+      <button id="tab-login" type="button" class="on" data-i18n="auth_login"></button>
+      <button id="tab-signup" type="button" data-i18n="auth_signup"></button>
+    </div>
+    <div id="row-name" hidden>
+      <label class="lbl" for="a-name" data-i18n="a_name"></label>
+      <input id="a-name" type="text" maxlength="60" autocomplete="off">
+    </div>
+    <label class="lbl" for="a-phone" data-i18n="a_phone"></label>
+    <input id="a-phone" type="tel" inputmode="numeric" maxlength="10" placeholder="10 digits" autocomplete="off">
+    <label class="lbl" for="a-pin"><span data-i18n="a_pin"></span> <small id="pin-hint"></small></label>
+    <div class="pw"><input id="a-pin" type="password" inputmode="numeric" maxlength="6" autocomplete="off"><button type="button" class="eye" aria-label="Show PIN" data-eye="a-pin"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+    <div id="row-pin2" hidden>
+      <label class="lbl" for="a-pin2" data-i18n="a_pin2"></label>
+      <div class="pw"><input id="a-pin2" type="password" inputmode="numeric" maxlength="6" autocomplete="off"><button type="button" class="eye" aria-label="Show PIN" data-eye="a-pin2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+    </div>
+    <div id="auth-err" class="err" role="alert"></div>
+    <button id="auth-go" class="btn primary" type="button"></button>
+    <p class="muted center" data-i18n="auth_foot"></p>
+    <button id="forgot" class="linkbtn danger center" type="button" hidden data-i18n="forgot"></button>
+  </section>
+
+  <main id="app" hidden>
+    <nav id="tabs" class="tabs" role="tablist" aria-label="Sections">
+      <span class="ind" aria-hidden="true"></span>
+      <button type="button" data-tab="home" class="on"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span data-i18n="nav_home"></span></button>
+      <button type="button" data-tab="pilgrims"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><path d="M16 5.2a3 3 0 0 1 0 5.6M18 14.3c1.9.7 3 2.6 3 5.7"/></svg><span data-i18n="nav_pilgrims"></span></button>
+      <button type="button" data-tab="alerts"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15z"/><path d="M10 21h4"/></svg><span data-i18n="nav_alerts"></span></button>
+      <button type="button" data-tab="settings"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg><span data-i18n="nav_settings"></span></button>
+    </nav>
+    <div id="weak" class="notice" hidden>
+      Short PIN. Change to 6 digits in Settings.
+    </div>
+
+    <!-- HOME -->
+    <div class="panel" id="tab-home">
+      <div class="card hero">
+        <svg class="chakra" viewBox="-50 -50 100 100" aria-hidden="true"><g fill="none" stroke="#C9962B" stroke-width="1.6"><circle r="46"/><circle r="38" stroke-width=".8"/><circle r="9"/>
+          <g id="spokes"><line x1="0" y1="-9" x2="0" y2="-38" transform="rotate(0)"/><line x1="0" y1="-9" x2="0" y2="-38" transform="rotate(30)"/><line x1="0" y1="-9" x2="0" y2="-38" transform="rotate(60)"/><line x1="0" y1="-9" x2="0" y2="-38" transform="rotate(90)"/><line x1="0" y1="-9" x2="0" y2="-38" transform="rotate(120)"/><line x1="0" y1="-9" x2="0" y2="-38" transform="rotate(150)"/><line x1="0" y1="-9" x2="0" y2="-38" transform="rotate(180)"/><line x1="0" y1="-9" x2="0" y2="-38" transform="rotate(210)"/><line x1="0" y1="-9" x2="0" y2="-38" transform="rotate(240)"/><line x1="0" y1="-9" x2="0" y2="-38" transform="rotate(270)"/><line x1="0" y1="-9" x2="0" y2="-38" transform="rotate(300)"/><line x1="0" y1="-9" x2="0" y2="-38" transform="rotate(330)"/></g></g>
+          <g fill="#C9962B"><circle cx="0" cy="-42" r="2.2" transform="rotate(15)"/><circle cx="0" cy="-42" r="2.2" transform="rotate(45)"/><circle cx="0" cy="-42" r="2.2" transform="rotate(75)"/><circle cx="0" cy="-42" r="2.2" transform="rotate(105)"/><circle cx="0" cy="-42" r="2.2" transform="rotate(135)"/><circle cx="0" cy="-42" r="2.2" transform="rotate(165)"/><circle cx="0" cy="-42" r="2.2" transform="rotate(195)"/><circle cx="0" cy="-42" r="2.2" transform="rotate(225)"/><circle cx="0" cy="-42" r="2.2" transform="rotate(255)"/><circle cx="0" cy="-42" r="2.2" transform="rotate(285)"/><circle cx="0" cy="-42" r="2.2" transform="rotate(315)"/><circle cx="0" cy="-42" r="2.2" transform="rotate(345)"/></g></svg>
+        <div class="muted htime"><svg class="diya" viewBox="0 0 24 24" aria-hidden="true"><path class="flame" d="M12 2c3 4 4 6 4 8.5A4 4 0 0 1 8 10.5C8 8 9 6.5 12 2z" fill="#F28C28"/><path class="flame in" d="M12 6c1.6 2.2 2 3.2 2 4.4a2 2 0 0 1-4 0C10 9.2 10.4 8.2 12 6z" fill="#FFE08A"/><path d="M3 15h18c0 4-3.6 6-9 6s-9-2-9-6z" fill="#B7791F"/><rect x="3" y="14" width="18" height="2" rx="1" fill="#E8B64B"/></svg><span data-i18n="h_time"></span></div>
+        <div id="ready" class="ready" hidden>🙏 Ready for booking</div>
+        <div id="count" class="count">--:--:--</div>
+        <div id="count-sub" class="muted"></div>
+        <div id="tz-warn" class="notice warn" hidden></div>
+      </div>
+      <button id="fill-btn" class="btn primary big" type="button" title="Check your details, then type Name and Age" data-i18n="btn_preview"></button>
+      <div class="two-btn">
+        <button id="copy-btn" class="btn ghost" type="button" title="Show details to copy and paste" data-i18n="btn_copy"></button>
+        <button id="practice-btn" class="btn ghost" type="button" title="Try the fill on a safe practice form" data-i18n="btn_practice"></button>
+      </div>
+      <details id="cl-card" class="card cl">
+        <summary><strong data-i18n="cl_title"></strong><span id="mala" class="mala" aria-hidden="true"></span><span id="cl-n" class="cl-n"></span></summary>
+        <div class="row" style="justify-content:flex-end"><button id="recheck" class="linkbtn" type="button" title="Check the page again">Re-check</button></div>
+        <ul id="checklist" class="checklist"></ul>
+      </details>
+      <div class="inline wrap" style="justify-content:center"><button id="open-site" class="linkbtn" type="button" title="Open the TTD website in a new tab">Open TTD site</button><button id="report-btn" class="linkbtn" type="button" title="Send a redacted description of the page (no personal details)" data-i18n="btn_report"></button></div>
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+    </div>
+
+    <!-- PILGRIMS -->
+    <div class="panel" id="tab-pilgrims" hidden>
+      <div class="row"><strong data-i18n="p_title"></strong><span id="p-count" class="muted"></span></div>
+      <div id="diyas" class="diyas" aria-hidden="true"></div>
+      <div id="groups" class="groups"></div>
+      <div id="list" class="list"></div>
+      <div id="form" class="card form" hidden>
+        <h3 id="form-title"></h3>
+        <label class="lbl" for="f-name" data-i18n="f_name"></label>
+        <input id="f-name" type="text" maxlength="80" autocomplete="off">
+        <div id="suggest"></div>
+        <div class="two">
+          <div><label class="lbl" for="f-age" data-i18n="f_age"></label><input id="f-age" type="number" min="1" max="120"></div>
+          <div><label class="lbl" for="f-gender" data-i18n="f_gender"></label><select id="f-gender"></select></div>
+        </div>
+        <div class="two">
+          <div><label class="lbl" for="f-idtype" data-i18n="f_idtype"></label><select id="f-idtype"></select></div>
+          <div id="idnum-wrap"><label class="lbl" for="f-idnum" data-i18n="f_idnum"></label>
+            <input id="f-idnum" type="text" inputmode="numeric" maxlength="12" autocomplete="off"></div>
+        </div>
+        <div id="idnum-hint" class="muted small"></div>
+        <div id="noid-note" class="muted small" hidden>ID numbers not saved. <button id="turn-on-ids" type="button" class="linkbtn">Save them</button></div>
+        <div id="pp-wrap" class="pp" hidden>
+          <div class="pp-h"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M8.5 16.5h7"/></svg><b>Passport pop-up details</b> <span class="muted small">optional, for NRI/foreign</span></div>
+          <div class="two">
+            <div><label class="lbl" for="f-country">Country</label><input id="f-country" type="text" maxlength="40" autocomplete="off" placeholder="e.g. USA"></div>
+            <div><label class="lbl" for="f-visatype">Type of Visa</label><input id="f-visatype" type="text" maxlength="40" autocomplete="off" placeholder="e.g. H1B"></div>
+          </div>
+          <div class="two">
+            <div id="visano-wrap"><label class="lbl" for="f-visano">Visa/OCS Number</label><input id="f-visano" type="password" maxlength="20" autocomplete="off"></div>
+            <div><label class="lbl" for="f-visaexp">Visa Validity Date</label><input id="f-visaexp" type="date" min="2020-01-01" max="2100-12-31"></div>
+          </div>
+        </div>
+        <div id="form-err" class="err" role="alert"></div>
+        <div class="two-btn">
+          <button id="save-btn" class="btn ok" type="button" data-i18n="btn_save"></button>
+          <button id="cancel-btn" class="btn ghost" type="button" data-i18n="btn_cancel"></button>
+        </div>
+      </div>
+      <button id="add-btn" class="btn dashed" type="button" data-i18n="p_add"></button>
+      <div id="group-save" class="inline" hidden>
+        <input id="g-name" type="text" maxlength="30" placeholder="Group name, e.g. Family">
+        <button id="g-save" class="btn small" type="button">Save selection as group</button>
+      </div>
+      <div id="toast" class="toast" role="status" aria-live="polite" hidden><span id="toast-text"></span><button id="undo-btn" type="button" class="linkbtn">Undo</button></div>
+    </div>
+
+    <!-- ALERTS -->
+    <div class="panel" id="tab-alerts" hidden>
+      <div class="card">
+        <strong class="hbell"><svg id="bell" class="bell" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a1.6 1.6 0 0 1 1.6 1.6v.7A6 6 0 0 1 18 10v4l2 3H4l2-3v-4a6 6 0 0 1 4.4-5.7v-.7A1.6 1.6 0 0 1 12 2z" fill="#C9962B"/><circle cx="12" cy="20" r="2" fill="#8E1B2B"/></svg><span data-i18n="r_title"></span></strong>
+        <div class="muted small" data-i18n="r_sub"></div>
+        <label class="lbl" for="rem-time">Date and time</label>
+        <input id="rem-time" type="datetime-local" aria-label="Release date and time">
+        <div id="rem-pretty" class="pretty"></div>
+        <div id="stages" class="stages"></div>
+        <div class="two-btn">
+          <button id="rem-set" class="btn ok" type="button" data-i18n="r_set"></button>
+          <button id="rem-clear" class="btn ghost" type="button" data-i18n="r_clear"></button>
+        </div>
+        <div class="inline wrap"><button id="rem-test" class="linkbtn" type="button" data-i18n="r_test"></button><button id="rem-ics" class="linkbtn" type="button">Add to phone calendar</button></div>
+        <div id="rem-status" class="status"></div>
+      </div>
+
+      <div class="card">
+        <strong data-i18n="ph_title"></strong>
+        <ol class="steps small"><li>Install <b>ntfy</b> on your phone.</li><li>Subscribe to the topic below (or scan the QR).</li><li>Press <b>Send test</b>.</li></ol>
+        <div class="inline"><input id="ph-topic" type="text" readonly aria-label="ntfy topic"><button id="ph-copy" class="btn small" type="button">Copy</button></div>
+        <div class="inline wrap">
+          <button id="ph-qr" class="linkbtn" type="button">Show QR code</button>
+          <button id="ph-rotate" class="linkbtn" type="button" data-i18n="ph_rotate"></button>
+        </div>
+        <div id="ph-qrbox" class="center" hidden></div>
+        <label class="check"><input id="ph-on" type="checkbox"> <span data-i18n="ph_on"></span></label>
+        <button id="ph-test" class="btn primary" type="button" data-i18n="ph_test"></button>
+        <div id="ph-status" class="status"></div>
+        <div class="muted small">Keep the topic private. Arrives even if the PC is off. Open Edge once in the 3 days before release.</div>
+      </div>
+
+      <div class="card">
+        <div class="row"><strong data-i18n="hc_title"></strong><button id="hc-run" class="linkbtn" type="button" data-i18n="hc_run"></button></div>
+        <ul id="hc-list" class="checklist"></ul>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="panel" id="tab-settings" hidden>
+      <div class="card">
+        <label class="lbl" for="lang" data-i18n="s_lang"></label>
+        <select id="lang"></select>
+        <label class="check"><input id="set-saveids" type="checkbox"> <span data-i18n="s_saveids"></span></label>
+        <div class="muted small hint">Off: you type IDs at fill time.</div>
+        <label class="check"><input id="set-sound" type="checkbox"> <span data-i18n="s_sound"></span></label>
+      </div>
+      <div class="card list-btns">
+        <button id="s-pin" class="btn ghost" type="button" data-i18n="s_changepin"></button>
+        <button id="s-export" class="btn ghost" type="button" data-i18n="s_export"></button>
+        <button id="s-import" class="btn ghost" type="button" data-i18n="s_import"></button>
+        <button id="s-csv" class="btn ghost" type="button">Import from spreadsheet (CSV)</button>
+        <button id="s-lock" class="btn ghost" type="button" data-i18n="s_lock"></button>
+        <button id="s-feedback" class="btn ghost" type="button">Feedback and ideas</button>
+      </div>
+      <div class="card">
+        <strong data-i18n="s_about"></strong>
+        <p class="muted small" id="about-text"></p>
+      </div>
+      <button id="del-acct" class="linkbtn danger center" type="button" data-i18n="s_delete"></button>
+    </div>
+  </main>
+
+  <div id="modal" class="modal" hidden><div class="sheet" id="sheet" role="dialog" aria-modal="true"></div></div>
+  <script src="lib/qrcode.js"></script>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

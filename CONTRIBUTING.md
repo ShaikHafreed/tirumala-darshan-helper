@@ -1,0 +1,2 @@
+# Contributing
+Pull requests are welcome. Run `npm test` and `node tests/e2e/fill.e2e.cjs` first. Features that automate the booking itself (slot polling, auto-selecting slots, OTP/captcha handling, auto-submit/payment, trusted-input tricks) will not be accepted. Never commit real personal data or real form snapshots containing it. Translations: edit `lib/i18n.js`; native-speaker review is especially welcome.

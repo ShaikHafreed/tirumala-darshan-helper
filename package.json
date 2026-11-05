@@ -1,0 +1,14 @@
+{
+  "name": "tirumala-darshan-helper",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Edge/Chrome extension: saves pilgrim details locally, fills text fields on the TTD Pilgrim Details form, and sends release reminders.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test \"tests/unit/*.test.mjs\"",
+    "test:e2e": "node tests/e2e/fill.e2e.cjs",
+    "lint": "node tools/check-syntax.mjs",
+    "package": "python3 tools/package.py"
+  },
+  "license": "MIT"
+}
